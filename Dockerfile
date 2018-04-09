@@ -1,7 +1,9 @@
 FROM debian:9.3
 
-LABEL author="Rei Smit <reimertsmit@gmail.com>"
-LABEL description "Centralised syslog collector, piping results to Loggly. Supervisord used for process monitoring"
+LABEL maintainer="Rei Smit <reimertsmit@gmail.com>"
+LABEL description="Centralised syslog collector, piping results to Loggly. Supervisord used for process monitoring"
+LABEL repo="https://github.com/reimert/loggly-syslog-collector"
+LABEL version="1.0.1"
 
 # OS Updates
 RUN apt update && \
@@ -15,7 +17,6 @@ RUN mkdir -p /var/spool/rsyslog
 RUN mkdir -pv /etc/rsyslog.d/keys/ca.d
 WORKDIR /etc/rsyslog.d/keys/ca.d
 RUN curl -O https://logdog.loggly.com/media/logs-01.loggly.com_sha12.crt
-#COPY ./configs/rsyslog.conf /usr/local/etc/
 COPY ./configs/rsyslog-loggly.conf /etc/rsyslog.conf
 
 # Start Script
@@ -27,7 +28,6 @@ WORKDIR /var/tmp
 
 # Expose Ports
 EXPOSE 514/udp
-EXPOSE 10514
 
 # Container Start
 CMD ["/usr/local/bin/run.sh"]
