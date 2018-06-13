@@ -1,0 +1,10 @@
+version: '3.6'
+services:
+  syslog:
+    build:
+      context: .
+    environment:
+      - LOGGLY_TOKEN=YOUR_LOGGLY_TOKEN
+      - LOGGLY_TAG=YOUR_LOGGLY_TAG
+    ports:
+      - "514:514/udp"

@@ -18,6 +18,7 @@ RUN mkdir -pv /etc/rsyslog.d/keys/ca.d
 WORKDIR /etc/rsyslog.d/keys/ca.d
 RUN curl -O https://logdog.loggly.com/media/logs-01.loggly.com_sha12.crt
 COPY ./configs/rsyslog-loggly.conf /etc/rsyslog.conf
+RUN ln -sf /dev/stdout /var/log/rsyslog.log && ln -sf /dev/stdout /var/log/rsyslog-error.log
 
 # Start Script
 COPY ./configs/run.sh /usr/local/bin/
